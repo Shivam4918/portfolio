@@ -639,7 +639,11 @@ function initContactForm() {
                 headers['X-CSRFToken'] = csrfToken;
             }
 
-            const response = await fetch('/api/contact/', {
+            const apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? ''
+                : 'https://portfolio-backend-2ayd.onrender.com';
+
+            const response = await fetch(`${apiBase}/api/contact/`, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify({ name, email, subject, message })
