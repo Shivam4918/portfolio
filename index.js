@@ -796,7 +796,7 @@ function initMobileNav() {
 
     // Close menu when resizing past breaking limits
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 768 && menu.classList.contains('open')) {
+        if (window.innerWidth > 1024 && menu.classList.contains('open')) {
             menu.classList.remove('open');
             toggle.innerHTML = '<i data-lucide="menu"></i>';
             if (window.lucide) {
