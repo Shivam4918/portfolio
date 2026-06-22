@@ -183,7 +183,7 @@ def send_contact_emails_async(name, email, subject, message):
                         I am passionate about building highly performant backend architectures and machine learning systems. I'll get back to you as soon as possible to discuss how we can collaborate.
                     </div>
                     <div class="btn-wrapper">
-                        <a href="https://portfolio-red-theta-8n1be2s0hl.vercel.app" class="btn">Visit My Portfolio</a>
+                        <a href="https://prajapatishivam.vercel.app" class="btn">Visit My Portfolio</a>
                     </div>
                     <div class="signature">
                         <div class="sig-name">Shivam Prajapati</div>
