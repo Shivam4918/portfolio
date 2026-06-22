@@ -1087,6 +1087,325 @@ body.cursor-hover .custom-cursor-outline {
 }
 
 /* ==========================================================================
+   Bento Grid Project Mockups & Visualizations
+   ========================================================================== */
+.project-split {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+    height: 100%;
+}
+
+.project-visual-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    padding-left: 10px;
+}
+
+/* Mockup Frame (Mac/Browser header) */
+.project-mockup {
+    width: 100%;
+    background: rgba(10, 10, 20, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    font-family: var(--font-body);
+}
+
+:root[data-theme="light"] .project-mockup {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.mockup-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+:root[data-theme="light"] .mockup-header-bar {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.mockup-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+.mockup-dot.red { background-color: #ff5f56; }
+.mockup-dot.yellow { background-color: #ffbd2e; }
+.mockup-dot.green { background-color: #27c93f; }
+
+.mockup-title {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 500;
+}
+
+.mockup-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* MedQueue AI Mockup details */
+.medqueue-visual {
+    max-width: 280px;
+}
+
+.queue-status-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    border-radius: 8px;
+}
+
+.status-metric {
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.metric-val {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.metric-val small {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--success);
+    box-shadow: 0 0 8px var(--success);
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.5; }
+    50% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.5; }
+}
+
+.queue-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.queue-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 6px;
+    font-size: 0.75rem;
+}
+
+.queue-row.active {
+    background: rgba(20, 184, 166, 0.05);
+    border: 1px solid rgba(20, 184, 166, 0.15);
+}
+
+.queue-row .patient {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.wait-tag {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    color: var(--text-secondary);
+}
+
+.wait-tag.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+}
+
+.wait-tag.warning {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--warning);
+}
+
+
+/* Projects 2 & 3 Visual Headers */
+.project-visual-header {
+    height: 160px;
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.03) 0%, transparent 100%);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 24px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* PortfolioCraft Mockup details */
+.portfoliocraft-visual {
+    transform: translateY(15px);
+    transition: transform var(--transition-normal);
+}
+
+.project-card:hover .portfoliocraft-visual {
+    transform: translateY(5px);
+}
+
+.prompt-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+}
+
+.ai-sparkle {
+    width: 12px;
+    height: 12px;
+    color: var(--accent);
+}
+
+.prompt-text {
+    color: var(--text-secondary);
+}
+
+.preview-layout-box {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.layout-rect {
+    height: 6px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.rect-header {
+    width: 30%;
+    background: var(--primary);
+}
+
+.rect-hero {
+    height: 14px;
+    width: 100%;
+}
+
+.layout-grid-mini {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.rect-grid-item {
+    height: 20px;
+}
+
+
+/* BharatSuraksha Mockup details */
+.bharatsuraksha-visual {
+    transform: translateY(15px);
+    transition: transform var(--transition-normal);
+}
+
+.project-card:hover .bharatsuraksha-visual {
+    transform: translateY(5px);
+}
+
+.secure-badge-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px;
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--success);
+    letter-spacing: 0.5px;
+}
+
+.shield-icon {
+    width: 12px;
+    height: 12px;
+}
+
+.case-log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.case-log-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+    font-size: 0.7rem;
+}
+
+.log-id {
+    color: var(--text-secondary);
+}
+
+.log-status {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+}
+
+.log-status.success {
+    color: var(--success);
+}
+
+
+/* ==========================================================================
    Skills Grid Redesign (Bento Block-Card Architecture)
    ========================================================================== */
 .skills-wrapper {
