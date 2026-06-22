@@ -1,3 +1,9 @@
+// Initialize Theme Toggle immediately to avoid theme flashes
+(function() {
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', savedTheme);
+})();
+
 // Initialize Lucide Icons
 document.addEventListener('DOMContentLoaded', () => {
     if (window.lucide) {
@@ -5,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Run all features
+    initThemeToggle();
     initCustomCursor();
     initCanvasParticles();
     initTypingEffect();
@@ -15,6 +22,26 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileNav();
     initSkillsTypewriter();
 });
+
+/* ==========================================================================
+   Theme Switcher & Persistent Preferences
+   ========================================================================== */
+function initThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) return;
+
+    toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Reinitialize canvas particles with correct colors
+        if (typeof window.reinitParticles === 'function') {
+            window.reinitParticles();
+        }
+    });
+}
 
 /* ==========================================================================
    Custom Cursor Trail
@@ -179,6 +206,8 @@ function initCanvasParticles() {
         const numberOfParticles = Math.floor((width * height) / 9000);
         const maxParticles = Math.min(numberOfParticles, 120); // Cap at 120 to keep CPU usages lightweight
         
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        
         for (let i = 0; i < maxParticles; i++) {
             let size = Math.random() * 2 + 1;
             let x = Math.random() * (width - size * 2) + size;
@@ -189,7 +218,11 @@ function initCanvasParticles() {
             let directionY = (Math.random() * 0.4) - 0.2;
             
             // Randomly pick Indigo/Teal accent colors with semi-transparency
-            const colorOptions = [
+            const colorOptions = isLight ? [
+                'rgba(79, 70, 229, 0.12)', // Indigo
+                'rgba(13, 148, 136, 0.12)', // Teal
+                'rgba(139, 92, 246, 0.08)'  // Purple
+            ] : [
                 'rgba(99, 102, 241, 0.25)', // Indigo
                 'rgba(20, 184, 166, 0.25)', // Teal
                 'rgba(217, 70, 239, 0.15)'  // Fuchsia
@@ -215,6 +248,8 @@ function initCanvasParticles() {
     // Draw lines between close particles
     function connectParticles() {
         let maxDistance = 100;
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        const strokeColor = isLight ? 'rgba(79, 70, 229, ' : 'rgba(99, 102, 241, ';
         for (let a = 0; a < particlesArray.length; a++) {
             for (let b = a; b < particlesArray.length; b++) {
                 let dx = particlesArray[a].x - particlesArray[b].x;
@@ -224,7 +259,7 @@ function initCanvasParticles() {
                 if (distance < maxDistance) {
                     // Line opacity drops off with distance
                     let alpha = (1 - (distance / maxDistance)) * 0.12;
-                    ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+                    ctx.strokeStyle = `${strokeColor}${alpha})`;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -234,6 +269,10 @@ function initCanvasParticles() {
             }
         }
     }
+
+    window.reinitParticles = () => {
+        initParticles();
+    };
 
     initParticles();
     animate();
