@@ -55,3 +55,5 @@ Desktop.ini
 dist/
 build/
 node_modules/
+
+.vercel
