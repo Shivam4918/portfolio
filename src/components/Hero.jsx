@@ -265,14 +265,14 @@ export default function Hero() {
                     <div>
                       <span className="text-[#6366F1]">$</span> cat role.txt
                     </div>
-                    <div className="text-[#06B6D4] font-semibold pl-4">Python Backend Developer</div>
+                    <div className="text-[#06B6D4] font-semibold pl-4">Backend Engineer (Python/Django)</div>
                   </div>
 
                   <div className="space-y-1">
                     <div>
                       <span className="text-[#6366F1]">$</span> echo $CGPA
                     </div>
-                    <div className="text-yellow-400 pl-4">8.88 / 10</div>
+                    <div className="text-yellow-400 pl-4">8.88 / 10.00</div>
                   </div>
 
                   <div className="space-y-1">
@@ -281,13 +281,13 @@ export default function Hero() {
                     </div>
                     <div className="pl-4 space-y-1 text-slate-400 text-xs">
                       <div>
-                        <span className="text-[#8B5CF6]">a3f9c12</span> MedQueue AI — reduce wait 40–50%
+                        <span className="text-[#8B5CF6]">a3f9c12</span> MedQueue AI – Reduced patient wait time by 40–50%
                       </div>
                       <div>
-                        <span className="text-[#8B5CF6]">b7e2a01</span> Kirana Store ERP — Django + React
+                        <span className="text-[#8B5CF6]">b7e2a01</span> Shivam Kirana Store ERP – Django + React
                       </div>
                       <div>
-                        <span className="text-[#8B5CF6]">d1c4f88</span> PortfolioCraft — Gemini AI builder
+                        <span className="text-[#8B5CF6]">d1c4f88</span> PortfolioCraft – AI-Powered Portfolio Builder
                       </div>
                     </div>
                   </div>
