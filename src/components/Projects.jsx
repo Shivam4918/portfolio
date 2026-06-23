@@ -3,27 +3,28 @@ import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 
 // Custom 3D Tilt Card Component with Dynamic Glare & preserve-3d
+// Uses a static container wrapper to prevent mouseleave flickering when tilted
 const TiltCard = ({ children, className }) => {
-  const cardRef = React.useRef(null);
+  const containerRef = React.useRef(null);
   const [tiltStyle, setTiltStyle] = React.useState({});
   const [glareStyle, setGlareStyle] = React.useState({ opacity: 0 });
 
   const handleMouseMove = (e) => {
-    const card = cardRef.current;
-    if (!card) return;
+    const container = containerRef.current;
+    if (!container) return;
 
-    const rect = card.getBoundingClientRect();
+    const rect = container.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -15; // Max 15deg tilt
-    const rotateY = ((x - centerX) / centerX) * 15;
+    const rotateX = ((y - centerY) / centerY) * -12; // Max 12deg tilt for perfect control
+    const rotateY = ((x - centerX) / centerX) * 12;
 
     setTiltStyle({
-      transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`,
+      transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`,
       transition: 'transform 0.1s ease-out',
       transformStyle: 'preserve-3d'
     });
@@ -31,8 +32,8 @@ const TiltCard = ({ children, className }) => {
     const glareX = (x / rect.width) * 100;
     const glareY = (y / rect.height) * 100;
     setGlareStyle({
-      opacity: 0.4,
-      background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 65%)`,
+      opacity: 0.35,
+      background: `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 65%)`,
       transition: 'opacity 0.15s ease-out',
       mixBlendMode: 'overlay'
     });
@@ -52,17 +53,22 @@ const TiltCard = ({ children, className }) => {
 
   return (
     <div
-      ref={cardRef}
+      ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={tiltStyle}
       className={`relative ${className}`}
+      style={{ transformStyle: 'preserve-3d' }}
     >
-      {children}
-      <div 
-        className="absolute inset-0 pointer-events-none z-30 rounded-[inherit]" 
-        style={glareStyle}
-      />
+      <div
+        className="w-full h-full rounded-[20px] relative transition-transform duration-100 ease-out"
+        style={{ ...tiltStyle, transformStyle: 'preserve-3d' }}
+      >
+        {children}
+        <div 
+          className="absolute inset-0 pointer-events-none z-30 rounded-[20px]" 
+          style={glareStyle}
+        />
+      </div>
     </div>
   );
 };
