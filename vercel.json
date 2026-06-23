@@ -5,6 +5,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://portfolio-backend-2ayd.onrender.com/api/:path*"
+    },
+    {
+      "source": "/((?!api|assets|Resume1.pdf).*)",
+      "destination": "/index.html"
     }
   ]
 }

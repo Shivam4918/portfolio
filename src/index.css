@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-primary: #6366F1;
+  --color-dark-bg: #050816;
+  
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom Base styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #050816;
+  color: #F1F5F9;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #050816;
+}
+::-webkit-scrollbar-thumb {
+  background: #6366F1;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #06B6D4;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 12px;
+  height: 12px;
+  background-color: #6366F1;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+  box-shadow: 0 0 10px rgba(99,102,241,0.5);
+}
+
+.custom-cursor-hover {
+  width: 24px;
+  height: 24px;
+  background-color: rgba(6, 182, 212, 0.3);
+  border: 1px solid #06B6D4;
+  box-shadow: 0 0 15px rgba(6,182,212,0.5);
+}
+
+/* Glassmorphism card styles */
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1),
+    0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+html.light .glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.25) 100%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    0 8px 32px 0 rgba(15, 23, 42, 0.04);
+}
+
+.glass-card-3d {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(28px) saturate(220%);
+  -webkit-backdrop-filter: blur(28px) saturate(220%);
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.2),
+    0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  transform-style: preserve-3d;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+html.light .glass-card-3d {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.35) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 1px 0 rgba(15, 23, 42, 0.05),
+    0 20px 40px -15px rgba(15, 23, 42, 0.06);
+}
+
+/* 3D Depth Utilities */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-sm {
+  transform: translateZ(15px);
+}
+
+.translate-z-md {
+  transform: translateZ(30px);
+}
+
+.translate-z-lg {
+  transform: translateZ(45px);
+}
+
+.glass-nav {
+  background: rgba(5, 8, 22, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+html.light .glass-nav {
+  background: rgba(248, 250, 252, 0.8);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+/* Glow utilities */
+.glow-indigo {
+  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15),
+              0 0 80px rgba(99, 102, 241, 0.05);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 40px rgba(6, 182, 212, 0.15);
+}
+
+.glow-indigo-hover:hover {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.3),
+              0 0 60px rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.glow-cyan-hover:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.3),
+              0 0 60px rgba(6, 182, 212, 0.1);
+  border-color: rgba(6, 182, 212, 0.3);
+}
+
+/* Font helper utilities */
+.mono-font {
+  font-family: var(--font-mono);
+}
+
+.heading-font {
+  font-family: var(--font-heading);
+}
+
+/* Accessibility features */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
