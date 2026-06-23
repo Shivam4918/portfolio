@@ -53,14 +53,15 @@ export default function Navbar({ theme, toggleTheme }) {
     >
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         
-        {/* SP Logo */}
-        <a href="#home" className="heading-font text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white select-none flex items-center gap-1">
-          <span className="text-[#6366F1]">S</span>
-          <span className="text-[#06B6D4]">P</span>
+        {/* Logo */}
+        <a href="#home" className="heading-font text-xl font-extrabold tracking-tight text-slate-900 dark:text-white select-none flex items-center gap-1">
+          <span className="text-[#6366F1] font-mono">&lt;</span>
+          <span>Prajapati shivam</span>
+          <span className="text-[#06B6D4] font-mono">/&gt;</span>
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => {
             const isActive = activeSection === link.id;
             return (
@@ -88,7 +89,7 @@ export default function Navbar({ theme, toggleTheme }) {
         </div>
 
         {/* Right Controls */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           {/* Dark / Light Toggle */}
           <button 
             onClick={toggleTheme}
@@ -114,7 +115,7 @@ export default function Navbar({ theme, toggleTheme }) {
         </div>
 
         {/* Mobile controls */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3 lg:hidden">
           <button 
             onClick={toggleTheme}
             className="p-2 rounded-full glass-card text-slate-500 dark:text-slate-300"
@@ -146,7 +147,7 @@ export default function Navbar({ theme, toggleTheme }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden glass-nav border-b border-slate-200/50 dark:border-white/10"
+            className="lg:hidden glass-nav border-b border-slate-200/50 dark:border-white/10"
           >
             <div className="px-6 py-8 flex flex-col gap-5">
               {navLinks.map((link) => (
