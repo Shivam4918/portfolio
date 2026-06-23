@@ -200,15 +200,22 @@ const ProjectCard = ({ project, isFeatured, theme }) => {
               <span>Repository</span>
             </a>
             
-            <a 
-              href={project.live} 
-              target="_blank" 
-              rel="noreferrer" 
-              className="flex items-center gap-1 text-xs font-mono font-bold text-[#6366F1] hover:text-[#06B6D4] transition-colors cursor-pointer"
-            >
-              <span>Live Demo</span>
-              <Icon icon="lucide:external-link" className="text-[10px]" />
-            </a>
+            {project.live && project.live !== '#' ? (
+              <a 
+                href={project.live} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="flex items-center gap-1 text-xs font-mono font-bold text-[#6366F1] hover:text-[#06B6D4] transition-colors cursor-pointer"
+              >
+                <span>Live Demo</span>
+                <Icon icon="lucide:external-link" className="text-[10px]" />
+              </a>
+            ) : (
+              <span className="flex items-center gap-1 text-xs font-mono text-slate-500 select-none">
+                <span>Demo Offline</span>
+                <Icon icon="lucide:lock" className="text-[10px]" />
+              </span>
+            )}
           </div>
 
         </div>
@@ -231,8 +238,8 @@ export default function Projects({ theme }) {
         "Real-time queue sync via WebSockets + Redis",
         "ML-based dynamic wait prediction"
       ],
-      github: "https://github.com/Shivam4918",
-      live: "https://prajapatishivam.vercel.app/",
+      github: "https://github.com/Shivam4918/medqueue-ai",
+      live: "https://medqueue-ai.onrender.com/",
       isFeatured: true,
       screenshot: "/images/MedQueue-AI.png", // Prop interface left empty for placeholder
       mockupSvg: (
@@ -265,8 +272,8 @@ export default function Projects({ theme }) {
         "Gemini AI content extraction from PDF",
         "REST-style dynamic preview endpoints"
       ],
-      github: "https://github.com/Shivam4918",
-      live: "https://prajapatishivam.vercel.app/",
+      github: "https://github.com/Shivam4918/portfoliocraft21",
+      live: "https://portfoliocraft-03vu.onrender.com/",
       isFeatured: false,
       screenshot: "/images/PortfolioCraft.png",
       mockupSvg: (
@@ -301,8 +308,8 @@ export default function Projects({ theme }) {
         "Optimized SQL schema, faster load time",
         "Secure digital cases workflow tracking"
       ],
-      github: "https://github.com/Shivam4918",
-      live: "https://prajapatishivam.vercel.app/",
+      github: "https://github.com/Shivam4918/BharatSuraksha.com",
+      live: "#",
       isFeatured: false,
       screenshot: "/images/BharatSuraksha.png",
       mockupSvg: (
