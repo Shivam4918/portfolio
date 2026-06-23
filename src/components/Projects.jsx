@@ -115,119 +115,116 @@ const BrowserMockup = ({ gradientClass, children, githubUrl }) => {
 // Project Card component
 const ProjectCard = ({ project, isFeatured, theme }) => {
   return (
-    <TiltCard className="w-full h-full rounded-[20px] preserve-3d">
-      <div 
-        className={`w-full h-full rounded-[20px] flex flex-col justify-between transition-all duration-300 glass-card-3d border ${
-          isFeatured 
-            ? 'border-[#6366F1]/50 dark:border-[#6366F1]/60 shadow-[0_15px_35px_rgba(99,102,241,0.15)]' 
-            : 'border-slate-200/50 dark:border-white/10'
-        }`}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        
-        {/* Top visual section (40% height) */}
-        <div className="w-full" style={{ transform: 'translateZ(15px)' }}>
-          {project.screenshot ? (
-            // If real screenshot prop exists, render it inside browser frame
-            <BrowserMockup gradientClass="from-slate-800 to-slate-900" githubUrl={project.github}>
-              <img 
-                src={project.screenshot} 
-                alt={project.name} 
-                className="w-full h-full object-cover object-top" 
-                loading="lazy"
-                width="400"
-                height="225"
-              />
-            </BrowserMockup>
+    <div 
+      className={`w-full h-full rounded-[20px] flex flex-col justify-between transition-all duration-300 glass-card-3d border hover:scale-[1.02] hover:-translate-y-1 ${
+        isFeatured 
+          ? 'border-[#6366F1]/50 dark:border-[#6366F1]/60 shadow-[0_15px_35px_rgba(99,102,241,0.15)] hover:shadow-[0_20px_40px_rgba(99,102,241,0.25)]' 
+          : 'border-slate-200/50 dark:border-white/10 hover:border-[#6366F1]/30 dark:hover:border-[#6366F1]/30 hover:shadow-[0_20px_40px_rgba(99,102,241,0.1)]'
+      }`}
+    >
+      
+      {/* Top visual section (40% height) */}
+      <div className="w-full">
+        {project.screenshot ? (
+          // If real screenshot prop exists, render it inside browser frame
+          <BrowserMockup gradientClass="from-slate-800 to-slate-900" githubUrl={project.github}>
+            <img 
+              src={project.screenshot} 
+              alt={project.name} 
+              className="w-full h-full object-cover object-top" 
+              loading="lazy"
+              width="400"
+              height="225"
+            />
+          </BrowserMockup>
+        ) : (
+          // Render custom gradient SVGs as mockups
+          <BrowserMockup gradientClass={project.gradient} githubUrl={project.github}>
+            {project.mockupSvg}
+          </BrowserMockup>
+        )}
+      </div>
+
+      {/* Bottom text section (60% height) */}
+      <div className="p-6 md:p-7 flex-1 flex flex-col justify-between">
+        <div>
+          {/* Name + period */}
+          <div className="flex items-start justify-between gap-3 mb-2">
+            <h3 className="heading-font text-lg md:text-xl font-extrabold text-slate-900 dark:text-white">{project.name}</h3>
+            <span className="glass-card px-2.5 py-0.5 font-mono text-[9px] text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-white/5 flex-shrink-0">
+              {project.period}
+            </span>
+          </div>
+
+          {/* Subtitle */}
+          <p className="text-slate-500 dark:text-slate-400 font-sans text-xs mb-4">{project.subtitle}</p>
+
+          {/* Stack badges */}
+          <div className="flex flex-wrap gap-1.5 mb-5">
+            {project.badges.map((badge, idx) => (
+              <span 
+                key={badge} 
+                className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full border ${
+                  idx % 2 === 0
+                    ? 'bg-[#6366F1]/10 text-[#6366F1] dark:text-[#a5b4fc] border-[#6366F1]/20'
+                    : 'bg-[#06B6D4]/10 text-[#06B6D4] dark:text-[#67e8f9] border-[#06B6D4]/20'
+                }`}
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
+
+          {/* Highlights */}
+          <ul className="space-y-2 mb-6">
+            {project.metrics.map((metric, idx) => (
+              <li key={idx} className="flex gap-2 items-start text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
+                <Icon icon="lucide:arrow-right-circle" className="text-[#06B6D4] text-sm flex-shrink-0 mt-0.5" />
+                <span>
+                  {idx === 0 ? (
+                    <strong className="text-[#06B6D4] font-semibold">{metric}</strong>
+                  ) : (
+                    metric
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Card footer links */}
+        <div className="flex items-center justify-between pt-4 border-t border-slate-200/50 dark:border-white/5 mt-auto">
+          <a 
+            href={project.github} 
+            target="_blank" 
+            rel="noreferrer" 
+            className="flex items-center gap-1.5 text-xs font-mono text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
+          >
+            <Icon icon="lucide:github" className="text-sm" />
+            <span>Repository</span>
+          </a>
+          
+          {project.live && project.live !== '#' ? (
+            <a 
+              href={project.live} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="flex items-center gap-1 text-xs font-mono font-bold text-[#6366F1] hover:text-[#06B6D4] transition-colors cursor-pointer"
+            >
+              <span>Live Demo</span>
+              <Icon icon="lucide:external-link" className="text-[10px]" />
+            </a>
           ) : (
-            // Render custom gradient SVGs as mockups
-            <BrowserMockup gradientClass={project.gradient} githubUrl={project.github}>
-              {project.mockupSvg}
-            </BrowserMockup>
+            <span className="flex items-center gap-1 text-xs font-mono text-slate-500 select-none">
+              <span>Demo Offline</span>
+              <Icon icon="lucide:lock" className="text-[10px]" />
+            </span>
           )}
         </div>
 
-        {/* Bottom text section (60% height) */}
-        <div className="p-6 md:p-7 flex-1 flex flex-col justify-between" style={{ transform: 'translateZ(30px)', transformStyle: 'preserve-3d' }}>
-          <div>
-            {/* Name + period */}
-            <div className="flex items-start justify-between gap-3 mb-2" style={{ transform: 'translateZ(10px)' }}>
-              <h3 className="heading-font text-lg md:text-xl font-extrabold text-slate-900 dark:text-white">{project.name}</h3>
-              <span className="glass-card px-2.5 py-0.5 font-mono text-[9px] text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-white/5 flex-shrink-0">
-                {project.period}
-              </span>
-            </div>
-
-            {/* Subtitle */}
-            <p className="text-slate-500 dark:text-slate-400 font-sans text-xs mb-4" style={{ transform: 'translateZ(5px)' }}>{project.subtitle}</p>
-
-            {/* Stack badges (alternating style) */}
-            <div className="flex flex-wrap gap-1.5 mb-5" style={{ transform: 'translateZ(12px)' }}>
-              {project.badges.map((badge, idx) => (
-                <span 
-                  key={badge} 
-                  className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full border ${
-                    idx % 2 === 0
-                      ? 'bg-[#6366F1]/10 text-[#6366F1] dark:text-[#a5b4fc] border-[#6366F1]/20'
-                      : 'bg-[#06B6D4]/10 text-[#06B6D4] dark:text-[#67e8f9] border-[#06B6D4]/20'
-                  }`}
-                >
-                  {badge}
-                </span>
-              ))}
-            </div>
-
-            {/* Highlights (metric styled in cyan) */}
-            <ul className="space-y-2 mb-6" style={{ transform: 'translateZ(15px)' }}>
-              {project.metrics.map((metric, idx) => (
-                <li key={idx} className="flex gap-2 items-start text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
-                  <Icon icon="lucide:arrow-right-circle" className="text-[#06B6D4] text-sm flex-shrink-0 mt-0.5" />
-                  <span>
-                    {idx === 0 ? (
-                      <strong className="text-[#06B6D4] font-semibold">{metric}</strong>
-                    ) : (
-                      metric
-                    )}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Card footer links */}
-          <div className="flex items-center justify-between pt-4 border-t border-slate-200/50 dark:border-white/5 mt-auto" style={{ transform: 'translateZ(20px)' }}>
-            <a 
-              href={project.github} 
-              target="_blank" 
-              rel="noreferrer" 
-              className="flex items-center gap-1.5 text-xs font-mono text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
-            >
-              <Icon icon="lucide:github" className="text-sm" />
-              <span>Repository</span>
-            </a>
-            
-            {project.live && project.live !== '#' ? (
-              <a 
-                href={project.live} 
-                target="_blank" 
-                rel="noreferrer" 
-                className="flex items-center gap-1 text-xs font-mono font-bold text-[#6366F1] hover:text-[#06B6D4] transition-colors cursor-pointer"
-              >
-                <span>Live Demo</span>
-                <Icon icon="lucide:external-link" className="text-[10px]" />
-              </a>
-            ) : (
-              <span className="flex items-center gap-1 text-xs font-mono text-slate-500 select-none">
-                <span>Demo Offline</span>
-                <Icon icon="lucide:lock" className="text-[10px]" />
-              </span>
-            )}
-          </div>
-
-        </div>
-
       </div>
-    </TiltCard>
+
+    </div>
   );
 };
 
