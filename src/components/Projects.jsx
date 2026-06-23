@@ -234,7 +234,7 @@ export default function Projects({ theme }) {
       github: "https://github.com/Shivam4918",
       live: "https://prajapatishivam.vercel.app/",
       isFeatured: true,
-      screenshot: "", // Prop interface left empty for placeholder
+      screenshot: "/images/MedQueue-AI.png", // Prop interface left empty for placeholder
       mockupSvg: (
         <svg viewBox="0 0 100 56.25" className="w-full h-full p-4 text-white opacity-80" xmlns="http://www.w3.org/2000/svg">
           <rect x="5" y="5" width="25" height="15" rx="2" fill="white" fillOpacity="0.05" stroke="white" strokeOpacity="0.1" />
@@ -268,7 +268,7 @@ export default function Projects({ theme }) {
       github: "https://github.com/Shivam4918",
       live: "https://prajapatishivam.vercel.app/",
       isFeatured: false,
-      screenshot: "",
+      screenshot: "/images/PortfolioCraft.png",
       mockupSvg: (
         <svg viewBox="0 0 100 56.25" className="w-full h-full p-4 text-white opacity-80" xmlns="http://www.w3.org/2000/svg">
           <rect x="5" y="5" width="20" height="46" rx="2" fill="white" fillOpacity="0.05" stroke="white" strokeOpacity="0.1" />
@@ -304,7 +304,7 @@ export default function Projects({ theme }) {
       github: "https://github.com/Shivam4918",
       live: "https://prajapatishivam.vercel.app/",
       isFeatured: false,
-      screenshot: "",
+      screenshot: "/images/BharatSuraksha.png",
       mockupSvg: (
         <svg viewBox="0 0 100 56.25" className="w-full h-full p-4 text-white opacity-80" xmlns="http://www.w3.org/2000/svg">
           {/* Top Panel bar */}
